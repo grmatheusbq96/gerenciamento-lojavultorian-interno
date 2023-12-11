@@ -14,7 +14,7 @@ public class ClienteModel : Entity<int>
     public string Celular { get; private set; }
     public string Email { get; private set; }
 
-    public ClienteModel(string nome, string documento, string endereco, string celular, string email)
+    public ClienteModel(string celular, string documento, string nome, string endereco, string email)
     {
         DataCadastro = DateTime.Now;
         Nome = nome;

@@ -4,6 +4,7 @@ using GerenciamentoVultorian.CQS.ViewModels.Result;
 using GerenciamentoVultorian.Domain.Enums;
 using GerenciamentoVultorian.Domain.Interfaces.Repositories;
 using GerenciamentoVultorian.Domain.Models;
+using GerenciamentoVultorian.Domain.Utils;
 using GerenciamentoVultorian.Domain.Validations;
 using MediatR;
 
@@ -22,11 +23,14 @@ public class CadastrarClienteHandler : IRequestHandler<CadastrarClienteCommand, 
     {
         try
         {
+            var documento = request.Documento.ExtrairNumeros();
+            var celular = request.Celular.ExtrairNumeros();
+
             var cliente = new ClienteModel(
+                celular,
+                documento,
                 request.Nome,
-                request.Documento,
                 request.Endereco,
-                request.Celular,
                 request.Email
                 );
 
@@ -39,7 +43,7 @@ public class CadastrarClienteHandler : IRequestHandler<CadastrarClienteCommand, 
                         StatusCodeEnum.Forbidden)
                     .AddMessages(clienteValido.AddErrorMessages()));
 
-            var clienteJaCadastradoParaODocumentoInformado = _clienteRepository.BuscarPorDocumento(request.Documento).FirstOrDefault();
+            var clienteJaCadastradoParaODocumentoInformado = _clienteRepository.BuscarPorDocumento(documento).FirstOrDefault();
             if (clienteJaCadastradoParaODocumentoInformado != null)
                 return Task.FromResult(
                         new ResultViewModel<ClienteViewModel>(
