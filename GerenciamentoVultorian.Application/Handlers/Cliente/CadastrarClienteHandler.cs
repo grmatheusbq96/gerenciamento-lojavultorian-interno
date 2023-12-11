@@ -39,6 +39,14 @@ public class CadastrarClienteHandler : IRequestHandler<CadastrarClienteCommand, 
                         StatusCodeEnum.Forbidden)
                     .AddMessages(clienteValido.AddErrorMessages()));
 
+            var clienteJaCadastradoParaODocumentoInformado = _clienteRepository.BuscarPorDocumento(request.Documento).FirstOrDefault();
+            if (clienteJaCadastradoParaODocumentoInformado != null)
+                return Task.FromResult(
+                        new ResultViewModel<ClienteViewModel>(
+                            null,
+                            StatusCodeEnum.Forbidden)
+                        .AddMessage("Documento informado já cadastrado."));
+
             _clienteRepository.Create(cliente);
             _clienteRepository.Commit();
 
