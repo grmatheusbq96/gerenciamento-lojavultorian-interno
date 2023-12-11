@@ -10,4 +10,7 @@ public class ClienteRepository : RepositorioGenerico<ClienteModel, int>, IClient
     public ClienteRepository(VultorianContext context) : base(context)
     {
     }
+
+    public IQueryable<ClienteModel> BuscarPorDocumento(string documento) =>
+        DbSet.Where(c => c.Documento.Equals(documento));
 }
