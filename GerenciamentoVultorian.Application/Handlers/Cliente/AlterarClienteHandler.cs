@@ -3,6 +3,7 @@ using GerenciamentoVultorian.CQS.ViewModels;
 using GerenciamentoVultorian.CQS.ViewModels.Result;
 using GerenciamentoVultorian.Domain.Enums;
 using GerenciamentoVultorian.Domain.Interfaces.Repositories;
+using GerenciamentoVultorian.Domain.Validations;
 using MediatR;
 
 namespace GerenciamentoVultorian.Application.Handlers.Cliente;
@@ -37,6 +38,14 @@ public class AlterarClienteHandler : IRequestHandler<AlterarClienteCommand, Resu
                 request.Celular,
                 request.Email
                 );
+
+            var clienteComDadosAtualizadosValidos = clienteEncontradoPorId.ModeloValido();
+            if (!clienteComDadosAtualizadosValidos.IsValid)
+                return Task.FromResult(
+                    new ResultViewModel<ClienteViewModel>(
+                        null,
+                        StatusCodeEnum.Forbidden)
+                    .AddMessages(clienteComDadosAtualizadosValidos.AddErrorMessages()));
 
             _clienteRepository.Commit();
 

@@ -67,11 +67,4 @@ public class ClienteController : ControllerBase
 
         return Created(urlParaBusca, objetoRetorno);
     }
-
-    //[HttpPut("Inativar")]
-    //[ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
-    //public IActionResult InativarCliente([FromBody] string value)
-    //{
-    //    return Ok();
-    //}
 }

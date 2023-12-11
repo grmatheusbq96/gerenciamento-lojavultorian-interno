@@ -37,7 +37,7 @@ public class BuscarClienteHandler : IRequestHandler<BuscarClienteQuery, ResultVi
             return Task.FromResult(
                 new ResultViewModel<List<ClienteViewModel>>(
                     null,
-                    StatusCodeEnum.Ok)
+                    StatusCodeEnum.InternalServerError)
                 .AddMessage("Ocorreu um erro interno no sistema!"));
         }
     }
