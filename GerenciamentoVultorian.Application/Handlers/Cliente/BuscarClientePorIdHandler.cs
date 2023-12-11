@@ -25,11 +25,11 @@ public class BuscarClientePorIdHandler : IRequestHandler<BuscarClientePorIdQuery
                 return Task.FromResult(
                     new ResultViewModel<ClienteViewModel>(
                         null,
-                        StatusCodeEnum.NotFound
-                        ).AddMessage("Nenhum cliente encontrado."));
+                        StatusCodeEnum.NotFound)
+                    .AddMessage("Nenhum cliente encontrado."));
             else
             {
-                ///Escrever aqui uma possível regra para cliente encontrado. Ex: verificar reputação do cliente
+                ///Escrever aqui uma possível regra para cliente encontrado. Ex: verificar reputação do cliente;
                 return Task.FromResult(
                     new ResultViewModel<ClienteViewModel>(
                         new ClienteViewModel(clienteEncontrado),
@@ -41,7 +41,7 @@ public class BuscarClientePorIdHandler : IRequestHandler<BuscarClientePorIdQuery
         {
             return Task.FromResult(
                 new ResultViewModel<ClienteViewModel>(
-                    new ClienteViewModel(),
+                    null,
                     StatusCodeEnum.InternalServerError)
                 .AddMessage("Ocorreu um erro interno no sistema!"));
         }

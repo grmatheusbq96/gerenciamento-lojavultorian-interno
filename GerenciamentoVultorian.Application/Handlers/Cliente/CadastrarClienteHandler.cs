@@ -35,14 +35,14 @@ public class CadastrarClienteHandler : IRequestHandler<CadastrarClienteCommand, 
             return Task.FromResult(
                 new ResultViewModel<ClienteViewModel>(
                     new ClienteViewModel(cliente),
-                    StatusCodeEnum.Created
-                    ).AddMessage("Cliente cadastrado com sucesso!"));
+                    StatusCodeEnum.Created)
+                .AddMessage("Cliente cadastrado com sucesso!"));
         }
         catch
         {
             return Task.FromResult(
                 new ResultViewModel<ClienteViewModel>(
-                    new ClienteViewModel(),
+                    null,
                     StatusCodeEnum.InternalServerError,
                     false)
                 .AddMessage("Ocorreu um erro interno no sistema!"));

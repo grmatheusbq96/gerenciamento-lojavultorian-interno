@@ -24,7 +24,11 @@ public class ClienteController : ControllerBase
     [ProducesResponseType(typeof(List<ResultViewModel<ClienteViewModel>>), (int)HttpStatusCode.OK)]
     public IActionResult BuscarTodosClientes()
     {
-        return Ok();
+        var objetoRetorno = _mediator.Send(new BuscarClienteQuery()).Result;
+        if (!objetoRetorno.Success)
+            return StatusCode((int)objetoRetorno.StatusCode, objetoRetorno);
+
+        return Ok(objetoRetorno);
     }
 
     [HttpGet("BuscarPorId")]
@@ -58,10 +62,10 @@ public class ClienteController : ControllerBase
         return Ok();
     }
 
-    [HttpPut("Inativar")]
-    [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
-    public IActionResult InativarCliente([FromBody] string value)
-    {
-        return Ok();
-    }
+    //[HttpPut("Inativar")]
+    //[ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
+    //public IActionResult InativarCliente([FromBody] string value)
+    //{
+    //    return Ok();
+    //}
 }
