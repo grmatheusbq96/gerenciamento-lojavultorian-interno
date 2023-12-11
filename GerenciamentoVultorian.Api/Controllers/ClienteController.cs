@@ -65,6 +65,6 @@ public class ClienteController : ControllerBase
         if (!objetoRetorno.Success)
             return StatusCode((int)objetoRetorno.StatusCode, objetoRetorno);
 
-        return Created(urlParaBusca, objetoRetorno);
+        return CreatedAtAction(urlParaBusca, objetoRetorno);
     }
 }
