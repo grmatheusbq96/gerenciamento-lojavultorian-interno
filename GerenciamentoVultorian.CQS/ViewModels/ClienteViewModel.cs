@@ -11,10 +11,6 @@ public class ClienteViewModel
     public string Celular { get; set; }
     public string Email { get; set; }
 
-    public ClienteViewModel()
-    {
-    }
-
     public ClienteViewModel(ClienteModel model)
     {
         Id = model.Id;

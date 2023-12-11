@@ -57,9 +57,15 @@ public class ClienteController : ControllerBase
 
     [HttpPut("Alterar")]
     [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
-    public IActionResult AlterarCliente([FromQuery] int id, [FromBody] string value)
+    public IActionResult AlterarCliente([FromQuery] int id, [FromBody] AlterarClienteDto dto)
     {
-        return Ok();
+        var objetoRetorno = _mediator.Send(new AlterarClienteCommand(id, dto)).Result;
+        var urlParaBusca = nameof(BuscarClientePorId);
+
+        if (!objetoRetorno.Success)
+            return StatusCode((int)objetoRetorno.StatusCode, objetoRetorno);
+
+        return Created(urlParaBusca, objetoRetorno);
     }
 
     //[HttpPut("Inativar")]

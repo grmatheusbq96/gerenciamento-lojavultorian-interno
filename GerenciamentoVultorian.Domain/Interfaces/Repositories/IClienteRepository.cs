@@ -5,4 +5,5 @@ namespace GerenciamentoVultorian.Domain.Interfaces.Repositories;
 
 public interface IClienteRepository : IRepositorioGenerico<ClienteModel, int>
 {
+    IQueryable<ClienteModel> BuscarPorDocumento(string documento);
 }

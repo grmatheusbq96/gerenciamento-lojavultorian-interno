@@ -1,4 +1,7 @@
-﻿namespace GerenciamentoVultorian.Domain.Models;
+﻿using FluentValidation.Results;
+using GerenciamentoVultorian.Domain.Validations;
+
+namespace GerenciamentoVultorian.Domain.Models;
 
 public class ClienteModel : Entity<int>
 {
@@ -33,4 +36,7 @@ public class ClienteModel : Entity<int>
 
         return this;
     }
+
+    public ValidationResult ModeloValido() =>
+        new ClienteValidation().Validate(this);
 }
