@@ -1,5 +1,6 @@
 ﻿using GerenciamentoVultorian.CQS.Commands.Cliente;
 using GerenciamentoVultorian.CQS.Dtos.Cliente;
+using GerenciamentoVultorian.CQS.Queries.Cliente;
 using GerenciamentoVultorian.CQS.ViewModels;
 using GerenciamentoVultorian.CQS.ViewModels.Result;
 using MediatR;
@@ -30,13 +31,25 @@ public class ClienteController : ControllerBase
     [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
     public IActionResult BuscarClientePorId([FromQuery] int id)
     {
-        return Ok();
+        var objetoRetorno = _mediator.Send(new BuscarClientePorIdQuery(id)).Result;
+        if (!objetoRetorno.Success)
+            return StatusCode((int)objetoRetorno.StatusCode, objetoRetorno);
+
+        return Ok(objetoRetorno);
     }
 
     [HttpPost("Cadastrar")]
     [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
-    public IActionResult CadastrarCliente([FromBody] CadastrarClienteDto dto) =>
-        Ok(_mediator.Send(new CadastrarClienteCommand(dto)).Result);
+    public IActionResult CadastrarCliente([FromBody] CadastrarClienteDto dto)
+    {
+        var objetoRetorno = _mediator.Send(new CadastrarClienteCommand(dto)).Result;
+        var urlParaBusca = nameof(BuscarClientePorId);
+
+        if (!objetoRetorno.Success)
+            return StatusCode((int)objetoRetorno.StatusCode, objetoRetorno);
+
+        return CreatedAtAction(urlParaBusca, objetoRetorno);
+    }
 
     [HttpPut("Alterar")]
     [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
