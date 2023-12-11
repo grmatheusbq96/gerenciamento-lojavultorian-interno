@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Handlers\" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GerenciamentoVultorian.CQS\GerenciamentoVultorian.CQS.csproj" />
+    <ProjectReference Include="..\GerenciamentoVultorian.Domain\GerenciamentoVultorian.Domain.csproj" />
   </ItemGroup>
 
 </Project>

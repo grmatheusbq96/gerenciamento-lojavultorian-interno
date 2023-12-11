@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\GerenciamentoVultorian.Application\GerenciamentoVultorian.Application.csproj" />
+    <ProjectReference Include="..\GerenciamentoVultorian.CQS\GerenciamentoVultorian.CQS.csproj" />
+    <ProjectReference Include="..\GerenciamentoVultorian.Infra.Persistence\GerenciamentoVultorian.Infra.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
