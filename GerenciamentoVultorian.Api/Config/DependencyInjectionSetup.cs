@@ -1,4 +1,7 @@
-﻿namespace GerenciamentoVultorian.Api.Config;
+﻿using GerenciamentoVultorian.Application.Extensions;
+using GerenciamentoVultorian.Infra.Persistence.Extensions;
+
+namespace GerenciamentoVultorian.Api.Config;
 
 public static class DependencyInjectionSetup
 {
@@ -7,6 +10,8 @@ public static class DependencyInjectionSetup
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddApplication();
+        builder.Services.AddPersistence();
 
         return builder;
     }
