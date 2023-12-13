@@ -1,4 +1,5 @@
 ﻿using GerenciamentoVultorian.Domain.Models;
+using GerenciamentoVultorian.Domain.Utils;
 
 namespace GerenciamentoVultorian.CQS.ViewModels;
 
@@ -15,9 +16,9 @@ public class ClienteViewModel
     {
         Id = model.Id;
         Nome = model.Nome;
-        Documento = model.Documento;
+        Documento = model.Documento.FormatarParaCpf();
         Endereco = model.Endereco;
-        Celular = model.Celular;
+        Celular = model.Celular.FormatarParaCelular();
         Email = model.Email;
     }
 }

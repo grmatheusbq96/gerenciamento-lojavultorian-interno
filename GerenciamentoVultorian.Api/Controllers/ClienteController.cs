@@ -43,7 +43,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPost("Cadastrar")]
-    [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.Created)]
     public IActionResult CadastrarCliente([FromBody] CadastrarClienteDto dto)
     {
         var objetoRetorno = _mediator.Send(new CadastrarClienteCommand(dto)).Result;
@@ -56,7 +56,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPut("Alterar")]
-    [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResultViewModel<ClienteViewModel>), (int)HttpStatusCode.Created)]
     public IActionResult AlterarCliente([FromQuery] int id, [FromBody] AlterarClienteDto dto)
     {
         var objetoRetorno = _mediator.Send(new AlterarClienteCommand(id, dto)).Result;
